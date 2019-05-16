@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0 //EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="nianzuochen.mybatis.mapper.DynamicMapper">
+	<!-- 使用Dynamic对象，向t_dynammic中插入一条数据 -->
+	<insert id="addDynamic" parameterType="nianzuochen.mybatis.domain.Dynamic"
+		useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO t_dynamic(DUId, DDescribe, DPhoto, DUpCount, DDownCount)
+		VALUES(#{user_id}, #{describe}, #{photo}, #{upCount}, #{downCount})
+	</insert>
+	<!-- 更新用户的好评 -->
+	<update id="updateDynamicUpCount" parameterType="nianzuochen.mybatis.domain.Dynamic">
+		UPDATE t_dynamic
+		SET DUpCount = #{upCount}
+		WHERE DId=#{id}
+	</update>
+	<!-- 更新用户的差评 -->
+	<update id="updateDynamicDownCount" parameterType="nianzuochen.mybatis.domain.Dynamic">
+		UPDATE t_dynamic
+		
+		SET DDownCount = #{downCount}
+		WHERE DId=#{id}
+	</update>
+	<!-- 根据给定的用户id查询用户的动态，动态可能多条，和对应的评论 -->
+	<select id="selectDynamicByUserId" parameterType="int"
+		resultMap="commonResultMap">
+			SELECT * FROM t_dynamic 
+				WHERE DUId = #{UId}
+				<!-- 这里使用的UID对应的就是UserMapper调用的时候传的值 -->
+	</select>
+	
+	<resultMap id="commonResultMap" type="nianzuochen.mybatis.domain.Dynamic">
+		<id  property="id" column="DId"/>
+		<result property="user_id" column="DUId"/>
+		<result property="describe" column="DDescribe"/>
+		<result property="photo" column="DPhoto"/>
+		<result property="date" column="DDate"/>
+		<result property="upCount" column="DUpCount"/>
+		<result property="downCount" column="DDownCount"/>
+		<!-- 该动态的用户信息 -->
+		<association property="dynamicUser" column="DUId"
+			javaType="nianzuochen.mybatis.domain.User"
+			select="nianzuochen.mybatis.mapper.UserMapper.selectSimpleUserById"
+			fetchType="lazy">
+		</association>
+		<!-- 动态的评论，将动态的id作为参数传递 -->
+		<collection property="commons" column="DId"
+			javaType="ArrayList" ofType="nianzuochen.mybatis.domain.Common"
+			select="nianzuochen.mybatis.mapper.CommonMapper.selectCommonsById"
+			fetchType="lazy">	
+		</collection>
+	</resultMap>
+	<!-- 按照时间排序查出前20条动态，及其评论 这里有一个错误，
+	没有将发布动态的用户的信息添加到dynamic中的  dynamicUser
+	因为commonResultMap中没有， 现在去添加-->
+	<select id="selectTwentyDynamics" resultMap="commonResultMap">
+		SELECT * FROM t_dynamic ORDER BY DDate DESC LIMIT 20
+	</select>
+</mapper>

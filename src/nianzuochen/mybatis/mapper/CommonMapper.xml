@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0 //EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="nianzuochen.mybatis.mapper.CommonMapper">
+	<!-- 根据动态的id查询动态的评论 -->
+	<select id="selectCommonsById" parameterType="int"
+		resultMap="commonResultMap">
+		SELECT * FROM t_common WHERE CDId = #{DId}
+	</select>
+	<resultMap id="commonResultMap" type="nianzuochen.mybatis.domain.Common" >
+		<id property="id" column="CId"/>
+		<result property="dynamic_id" column="CDId"/>
+		<result property="common_user_id" column="CUId"/>
+		<result property="comment" column="CComent"/>
+		<result property="date" column="CComDate"/>
+		<!-- 要根据CUId查询出评论的用户的信息，仅仅是用户的信息，没有用户的动态 -->
+		<association property="commonUser" column="CUId" 
+			javaType="nianzuochen.mybatis.domain.User"
+			select="nianzuochen.mybatis.mapper.UserMapper.selectSimpleUserById">
+		</association>
+	</resultMap>
+	
+	<!-- 插入一条动态 -->
+	<insert id="addComent" parameterType="nianzuochen.mybatis.domain.Common">
+		INSERT INTO t_common(CDId, CUId, CComent)
+			VALUES(#{dynamic_id}, #{common_user_id}, #{comment})
+	</insert>
+</mapper>

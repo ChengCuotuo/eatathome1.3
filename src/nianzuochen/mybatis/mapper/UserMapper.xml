@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0 //EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="nianzuochen.mybatis.mapper.UserMapper">
+	<!-- 向数据库的用户表中插入一条信息
+	keyProperty表示将插入数据生成的主键设置到对象的id中 -->
+	<insert id="addUser" parameterType="nianzuochen.mybatis.domain.User"
+		useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO t_user(UName, UPassword, UAge, UGender, UHead,USignature) 
+			VALUES(#{name}, #{password}, #{age}, #{gender},#{head}, #{signature})
+	</insert>
+	
+	<!-- 更新用户信息 用户创建时间和被删除的动态量是不允许设置的 
+		由数据库自动生成-->
+	<update id="updateUser" parameterType="nianzuochen.mybatis.domain.User">
+		UPDATE t_user
+			<set>
+				<if test="name != null">UName=#{name},</if>
+				<if test="password != null">UPassword=#{password},</if>
+				<if test="age != null">UAge=#{age},</if>
+				<if test="head != null">UHead=#{head},</if>
+				<if test="gender != null">UGender=#{gender},</if>
+				<if test="signature != null">USignature=#{signature}</if>
+			</set>
+		WHERE UId=#{id}
+	</update>
+	<!-- 用户发布动态 ，用户 生成一个Dynamic对象之后使用DynamicMapper
+		照片那个的addDynamic实现用户的动态发布-->
+	
+	<!-- 删除用户 -->
+	<delete id="removeUserById" parameterType="int">
+		DELETE FROM t_user WHERE UId = #{id}
+	</delete>
+	
+	<!-- 使用用户的id进行用户的简单查询 -->
+	<select id="selectSimpleUserById" parameterType="int"
+		resultMap="simpleUserResultMap">
+		SELECT * FROM t_user WHERE UId = #{id}
+	</select>
+	<!-- 简单查询用户的信息，没有动态 -->
+	<select id="selectSimpleUser" parameterType="string"
+		resultMap="simpleUserResultMap">
+			SELECT * FROM t_user WHERE UName = #{name}
+	</select>
+	<resultMap id="simpleUserResultMap" type="nianzuochen.mybatis.domain.User">
+		<id property="id" column="UId"/>
+		<result property="name" column="UName"/>
+		<result property="age" column="UAge"/>
+		<result property="password" column="UPassword"/>
+		<result property="gender" column="UGender"/>
+		<result property="head" column="UHead"/>
+		<result property="signature" column="USignature"/>
+		<result property="delete" column="UDel"/>
+		<result property="createDate" column="UCreateDate"/>	
+	</resultMap>
+	
+	<!-- 使用用户的id查询用户的信息，同时查出用户的动态以及动态的评论 -->
+	<select id="selectUser" parameterType="nianzuochen.mybatis.domain.User"
+		resultMap="userResultMap">
+			SELECT * FROM t_user WHERE UName = #{name} AND UPassword = #{password}
+	</select>
+	<resultMap id="userResultMap" type="nianzuochen.mybatis.domain.User">
+		<id property="id" column="UId"/>
+		<result property="name" column="UName"/>
+		<result property="age" column="UAge"/>
+		<result property="password" column="UPassword"/>
+		<result property="gender" column="UGender"/>
+		<result property="head" column="UHead"/>
+		<result property="signature" column="USignature"/>
+		<result property="delete" column="UDel"/>
+		<result property="createDate" column="UCreateDate"/>	
+		<!-- 用户的动态 -->
+		<collection property="dynamics" column="UId" 
+			javaType="ArrayList" ofType="nianzuochen.mybatis.domain.Dynamic"
+			select="nianzuochen.mybatis.mapper.DynamicMapper.selectDynamicByUserId"
+			fetchType="lazy">
+		</collection>
+	</resultMap>
+</mapper>
