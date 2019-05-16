@@ -1,3 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0 //EN"
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="nianzuochen.mybatis.mapper.MenuMapper">
+	<!-- 根据菜品的id查询出菜品的信息， 包括菜品的做法-->
+	<select id="selectMenu" parameterType="String" resultMap="menuMap">
+		SELECT * from t_menu WHERE m_id = #{id}
+	</select>
+	<resultMap id="menuMap" type="nianzuochen.mybatis.domain.Menu">
+		<id property="id" column="m_id"/>
+		<result property="name" column="m_name"/>
+		<result property="img" column="m_img"/>
+		<result property="content" column="m_content"/>
+		<result property="cid" column="m_cid"/>
+		<!-- 一对多，按照做法的 m_id 查询出所有的做法 -->
+		<collection property="practices" javaType="ArrayList" ofType="nianzuochen.mybatis.domain.Practice"
+			column="m_id" select="nianzuochen.mybatis.mapper.PracticeMapper.selectParactices"
+			fetchType="lazy">
+		</collection>
+	</resultMap>
+	
+	<!-- 根据给定菜品的分类，查出所有相同类型的菜品 -->
+	<select id="selectSameType" parameterType="String" resultMap="sameType">
+		SELECT * FROM t_menu WHERE m_cid = #{cid}
+	</select>
+	<resultMap id="sameType" type="nianzuochen.mybatis.domain.Menu">
+	<id property="id" column="m_id"/>
+		<result property="name" column="m_name"/>
+		<result property="img" column="m_img"/>
+		<result property="content" column="m_content"/>
+		<result property="cid" column="m_cid"/>
+	</resultMap>
+</mapper>

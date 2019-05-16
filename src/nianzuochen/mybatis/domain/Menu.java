@@ -44,4 +44,16 @@ public class Menu implements Serializable{
 		return practices;
 	}
 	
+	@Override
+	public String toString() {
+		StringBuilder str = new StringBuilder("name: " + this.name + ", img: " + this.img + ", content: " + this.content
+				+ ", practice -> [\n");
+		if (practices != null) {
+			for (Practice p : practices) {
+				str.append(p.toString() + "\n");
+			}
+		}
+		str.append("]");
+		return str.toString();
+	}
 }

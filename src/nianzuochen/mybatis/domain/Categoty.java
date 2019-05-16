@@ -25,4 +25,15 @@ public class Categoty implements Serializable{
 		return menus;
 	}
 	
+	@Override
+	public String toString() {
+		StringBuilder str = new StringBuilder("id: " + this.id + ", name: " + this.name + ", menus -> {");
+		if (menus != null) {
+			for (Menu m : menus) {
+				str.append(m.toString() + "\n");
+			}
+		}
+		str.append("}");
+		return str.toString();
+	}
 }

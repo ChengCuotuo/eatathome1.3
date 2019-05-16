@@ -1,3 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0 //EN"
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="nianzuochen.mybatis.mapper.CategotyMapper">
+	<!-- 查询所有的菜品分类信息 -->
+	<select id="selectCategoties" resultMap="categoties">
+		SELECT * FROM t_categoty
+	</select>
+	<resultMap id="categoties" type="nianzuochen.mybatis.domain.Categoty">
+		<id property="id" column="c_id"/>
+		<result property="name" column="c_name"/>
+	</resultMap>
+	
+	<!-- 根据菜品分类的 id 查找完整的菜品 -->
+	<select id="selectCategotyById" parameterType="String" resultMap="categotyInfo">
+		SELECT * FROM t_categoty WHERE c_id = #{id}
+	</select>
+	<resultMap id="categotyInfo" type="nianzuochen.mybatis.domain.Categoty">
+		<id property="id" column="c_id"/>
+		<result property="name" column="c_name"/>
+		<collection property="menus" javaType="ArrayList" 
+			ofType="nianzuochen.mybatis.domain.Categoty" column="c_id"
+			select="nianzuochen.mybatis.mapper.MenuMapper.selectSameType"
+			fetchType="lazy">
+		</collection>
+	</resultMap>
+</mapper>
