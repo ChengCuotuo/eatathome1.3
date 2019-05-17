@@ -5,7 +5,7 @@
 <head>
 <meta charset="utf-8">
 <!-- 一秒钟跳转至主页面 -->
-<meta http-equiv="refresh" content="1; url=substance/first.jsp"/>
+<meta http-equiv="refresh" content="1; url=easyui_pages/pages/dynamicForm.html"/>
 <title>welcome</title>
 </head>
 <body>
