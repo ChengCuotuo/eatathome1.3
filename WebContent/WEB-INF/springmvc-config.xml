@@ -30,13 +30,13 @@
 		<property name="prefix">
 			<value>/WEB-INF/content/</value>
 		</property>
+	<!-- 
 		<property name="suffix">
 			<value>.jsp</value>
 		</property>
+	-->
 
 	</bean>
-
-	
 	<!-- 处理映射器将bean的name作为url进行查找，需要在配置Handle时指定name（即url） -->
 	<bean class="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping"/>
 
@@ -58,4 +58,5 @@
         	<value>UTF-8</value>
         </property>
     </bean>
+    
 </beans>

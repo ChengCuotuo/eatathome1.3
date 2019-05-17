@@ -10,6 +10,21 @@
     <link rel="stylesheet" type="text/css" href="../themes/color.css">
     <script type="text/javascript" src="../jquery.min.js"></script>
     <script type="text/javascript" src="../jquery.easyui.min.js"></script>
+    <script type="text/javascript">
+	   $(function() {
+		   $('a').click(function() {
+			   //获取地址信息
+			   var url = this.href;
+			   //参数，保证每次的请求都是不一样的，用来预防缓存，是 json 格式的
+			   var args = {"time", new Date()};
+			   //get方法请求参数，data就是获取到的返回值
+			   $.getJSON(url, args, function(data) {
+				   //获取的应该是 json 类型的数据
+				   alert(data);
+			   })
+		   })
+	   })
+    </script>
 </head>
 <body class="easyui-layout">
 <!-- 这个布局比较复杂，center、west、east
@@ -82,7 +97,7 @@
         <div data-options="region:'center',disabled:true" style="width:100%;height:100%">
             <div class="easyui-accordion" data-options="multiple:false">
                 <div title="早餐"style="overflow:auto;padding:10px;">
-                    <p><a href="#">土豆火腿早餐饼</a></p>
+                    <p><a href="zc1">土豆火腿早餐饼</a></p>
                     <p><a href="#">十分钟就做好的懒人双皮奶</a></p>
                     <p><a href="#">快手香蕉派</a></p>
                 </div>

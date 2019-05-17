@@ -6,5 +6,5 @@ import nianzuochen.mybatis.domain.Menu;
 
 public interface MenuMapper {
 	public Menu selectMenu(String id);
-	List<Menu> selectSameType(String cid);
+	public List<Menu> selectSameType(String cid);
 }
