@@ -18,23 +18,35 @@ import nianzuochen.mybatis.domain.Categoty;
 public class InitHomePage {
 	private CategotyService cs = new CategotyService();
 	//初始化主页面
-	@RequestMapping(value="init")
-	public String initHomePage(HttpServletResponse response) {
-		response.setContentType("text/html; charset=utf-8"); 
+	@RequestMapping(value="initPage")
+	public void initPage(HttpServletResponse response) {
+		response.setContentType("text/html; charset=utf-8");
 		//获取 jackjson 对象
 		ObjectMapper mapper = new ObjectMapper();
 		//查询表 categoty 中的数据
 		ArrayList<Categoty> categoties = (ArrayList<Categoty>) cs.selectCategoties();
-		String json = "";
+		StringBuilder json = new StringBuilder("[");
 		try {
 			//在初始化页面需要将数据库中菜品分类信息查询出来用来初始化 menu.html 页面
-			json = mapper.writeValueAsString(categoties);
-			response.getWriter().print(json);
+			//需要将得到的数据信息格式化
+			for (Categoty c : categoties) {
+				String menuJson = mapper.writeValueAsString(c.getMenus());
+				json.append("{\"id\": \"" + c.getId() + "\", \"name\": \"" + c.getName() + 
+						"\", \"menus\":" + menuJson + "}, ");
+			}
+			json.append("{}]");
+			System.out.println(json.toString());
+			response.getWriter().print(json.toString());
 		} catch (JsonProcessingException ex) {
 			ex.printStackTrace();
 		} catch (IOException ex) {
 			ex.printStackTrace();
 		}
+		//System.out.println(json);
+	}
+	
+	@RequestMapping(value="init")
+	public String initHomePage(HttpServletResponse response) {
 		//返回的是 menu.jsp
 		return "menu.html";
 	}

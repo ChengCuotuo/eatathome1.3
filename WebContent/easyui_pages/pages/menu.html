@@ -12,6 +12,20 @@
     <script type="text/javascript" src="${pageContext.request.contextPath}/../easyui_pages/jquery.easyui.min.js"></script>
 	<script type="text/javascript">
 	$(function() {
+		var url = "initPage";
+		var args = {"time" : new Date()};
+		$.getJSON(url, args, function(data){
+			alert(data[0].name);
+			/*
+			//需要的数据格式
+				<div class="categoty" id="zc" title="早餐"style="overflow:auto;padding:10px;">
+                    <p><a href="menu/zc1">土豆火腿早餐饼</a></p>
+                    <p><a href="menu/zc2">十分钟就做好的懒人双皮奶</a></p>
+                    <p><a href="menu/zzc3">快手香蕉派</a></p>
+                </div>
+			*/
+		});
+		
 		$('a').click(function(){   	
 			var url = this.href;
 			var args = {"time" : new Date()};
@@ -20,6 +34,7 @@
 			});
 			 return false;
 		}) 
+		
 	})
     </script>
 
@@ -98,7 +113,7 @@
                 <div class="categoty" id="zc" title="早餐"style="overflow:auto;padding:10px;">
                     <p><a href="menu/zc1">土豆火腿早餐饼</a></p>
                     <p><a href="menu/zc2">十分钟就做好的懒人双皮奶</a></p>
-                    <p><a href="menu/zzc3">快手香蕉派</a></p>
+                    <p><a href="menu/zc3">快手香蕉派</a></p>
                 </div>
                 <div class="categoty" id="xwc" title="下午茶" style="padding:10px;">
                     <p><a href="menu/zxwc1">黄油曲奇</a></p>

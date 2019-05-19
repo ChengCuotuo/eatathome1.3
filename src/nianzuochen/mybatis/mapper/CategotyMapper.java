@@ -6,5 +6,4 @@ import nianzuochen.mybatis.domain.Categoty;
 
 public interface CategotyMapper {
 	public List<Categoty> selectCategoties();
-	public Categoty selectCategotyById(String id);
 }

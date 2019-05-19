@@ -22,13 +22,4 @@ public class CategotyService {
 		session.commit();
 		return categoties;
 	}
-	
-	//获取某一类菜品的信息
-	public Categoty selectCategotyById(String id) {
-		session = MySqlSessionFactory.getSqlSession();
-		CategotyMapper cp = session.getMapper(CategotyMapper.class);
-		Categoty categoty = cp.selectCategotyById(id);
-		session.commit();
-		return categoty;
-	}
 }

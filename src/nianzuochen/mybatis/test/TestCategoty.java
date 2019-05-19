@@ -12,11 +12,11 @@ public class TestCategoty {
 	public static void main(String[] args) {
 		SqlSession session = MySqlSessionFactory.getSqlSession();
 		CategotyMapper cp = session.getMapper(CategotyMapper.class);
-//		ArrayList<Categoty> categoties = (ArrayList<Categoty>) cp.selectCategoties();
-//		for (Categoty c : categoties) {
-//			System.out.println(c);
-//		}
-		Categoty c = cp.selectCategotyById("zc");
-		System.out.println(c);
+		ArrayList<Categoty> categoties = (ArrayList<Categoty>) cp.selectCategoties();
+		for (Categoty c : categoties) {
+			System.out.println(c);
+		}
+		//Categoty c = cp.selectCategotyById("zc");
+		//System.out.println(c);
 	}
 }
