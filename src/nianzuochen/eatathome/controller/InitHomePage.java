@@ -10,6 +10,6 @@ public class InitHomePage {
 	public String initHomePage() {
 		
 		//·µ»ØµÄÊÇ menu.jsp
-		return "WebContent/easyui_pages/pages/enum.html";
+		return "menu.html";
 	}
 }

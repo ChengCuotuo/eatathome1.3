@@ -27,13 +27,16 @@
 但是当文件和content同一级的时候就找不到了 -->
 	<bean id="viewResolver"
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		 
 		<property name="prefix">
-			<value>/WEB-INF/content/</value>
+			<value>easyui_pages/pages/</value>
 		</property>
-	 
+		
+	 	<!--
 		<property name="suffix">
 			<value>.jsp</value>
 		</property>
+		 -->
 	</bean>
 	<!-- 处理映射器将bean的name作为url进行查找，需要在配置Handle时指定name（即url） -->
 	<bean class="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping"/>

@@ -26,7 +26,7 @@ public class TestAjax {
 	private MenuService ms = new MenuService();
 	//响应前台对早餐的请求返回早餐的基本信息
 	@ResponseBody
-	@RequestMapping(value="easyui_pages/pages/{formName}")
+	@RequestMapping(value="menu/{formName}")
 	public void getInfo(HttpServletResponse response, @PathVariable String formName) {
 		response.setContentType("text/html; charset=utf-8");
 		//单一处理，传递来的参数就是 zc1
