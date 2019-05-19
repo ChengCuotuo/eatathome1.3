@@ -16,20 +16,28 @@
         不现实边界 border:false-->
     <!-- 顶部放图标等导航信息 -->
     <div data-options="region:'north',disabled:true" style="height:14%; background-color: #1f637b">
-        <a href="#" class="easyui-menubutton"
-           data-options="menu:'#mm1',iconCls:'icon-edit'"
-           style="margin:20px 100px 0 0;float:right; color:#ffffff">Edit</a>
-        <div id="logo" style="height:100%;width:30%;">
-            <a href="#">
-                <img id="go_homepage" src="images/theme.jpg"
-                     style="height:90%;width:80%; margin:0 0 0 20px; float: left" alt="图片无法显示"/>
+        <div style="padding:0 20px 0 0;">
+            <a href="#" class="easyui-menubutton c6"
+               data-options="menu:'#mm1'" style="float:right; margin:20px 20px 0 0;">
+                <img src="images/test.png" style="width:50px; height:50px;"/>
             </a>
         </div>
 
+        <div id="logo" style="height:100%;width:30%;float:left;">
+            <a href="#">
+                <img id="go_homepage" src="images/theme.jpg"
+                     style="height:90%;width:80%; margin:0 0 0 20px; " alt="图片无法显示"/>
+            </a>
+        </div>
+
+        <div style="height:100%;width:30%; float:left; font-size:20px;">
+            <a href="#" style="color: #ffffff;float:left; padding:40px 50px 0 0;
+                text-decoration: none;">查看动态</a>
+            <a href="#" style="color: #ffffff;float:left; padding:40px 50px 0 0;
+                text-decoration: none;">发布动态</a>
+		</div>
+
         <div id="mm1" style="width:150px;">
-            <div data-options="iconCls:'icon-undo'">Undo</div>
-            <div data-options="iconCls:'icon-redo'">Redo</div>
-            <div class="menu-sep"></div>
             <div>历史动态</div>
             <div>修改密码</div>
         </div>
