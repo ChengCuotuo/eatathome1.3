@@ -11,17 +11,16 @@
     <script type="text/javascript" src="../jquery.min.js"></script>
     <script type="text/javascript" src="../jquery.easyui.min.js"></script>
 	<script type="text/javascript">
-	   $(function() {
-		   $('a').click(function(){
-		        var url = this.href;
-		        alert(url);
-		        var args = {"time" : new Date()};
-		      	$.getJSON(url, args, function(data){
-		          alert(data.name);
-		        });
-		        return false;
-		      })
-	   })
+	$(function() {
+		$('a').click(function(){   	
+			var url = this.href;
+			var args = {"time" : new Date()};
+			$.getJSON(url, args, function(data){
+				alert(data.name);
+			});
+			 return false;
+		}) 
+	})
     </script>
 
 </head>
