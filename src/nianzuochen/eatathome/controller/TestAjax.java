@@ -1,7 +1,9 @@
 package nianzuochen.eatathome.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -19,6 +21,7 @@ import nianzuochen.eatathome.service.CategotyService;
 import nianzuochen.eatathome.service.MenuService;
 import nianzuochen.mybatis.domain.Categoty;
 import nianzuochen.mybatis.domain.Menu;
+import nianzuochen.mybatis.domain.Practice;
 
 @Controller
 public class TestAjax {
@@ -29,30 +32,36 @@ public class TestAjax {
 	@RequestMapping(value="menu/{formName}")
 	public void getInfo(HttpServletResponse response, @PathVariable String formName) {
 		response.setContentType("text/html; charset=utf-8");
+		ObjectMapper mapper = new ObjectMapper();
 		//单一处理，传递来的参数就是 zc1
 		Menu menu = ms.selectMenu(formName);
 		Map<String,String> map = new HashMap<String,String>();
-		if (menu != null) {
-			map.put("id", menu.getId());
-			map.put("name", menu.getName());
-			map.put("img", menu.getImg());
-			map.put("content", menu.getContent());
-			map.put("practice", menu.getPractices().toString());
-		}
-		//需要使用 jackjson 将数据(map类型数据)打包成 json 格式的数据流
-		String json = "";
+		String practiceInfoJson = "";
+		String practicesJson = "";
 		try {
-			ObjectMapper mapper = new ObjectMapper();
-			json = mapper.writeValueAsString(map);
-			System.out.println(json);
+			if (menu != null) {
+				map.put("id", menu.getId());
+				map.put("name", menu.getName());
+				map.put("img", menu.getImg());
+				map.put("content", menu.getContent());
+				//需要使用 jackjson 将数据(map类型数据)打包成 json 格式的数据流
+				practiceInfoJson = mapper.writeValueAsString(map);
+				ArrayList<Practice> practices = (ArrayList<Practice>)menu.getPractices();
+//				for (Practice p : practices) {
+//					practicesJson.append(mapper.writeValueAsString(p) + ", ");
+//				}
+				//practicesJson.append("{}}}");
+				practicesJson = mapper.writeValueAsString(practices);
+			}
+			//将数据封装成 json 格式，传递给前台
+			practiceInfoJson = practiceInfoJson.replace("}", ", \"practice\": " + practicesJson + "}");
 		} catch (JsonProcessingException ex) {
 			ex.printStackTrace();
 		}
-	
-		System.out.println(map);
 		try {
 			//把 json 数据流传递给前台
-			response.getWriter().print(json);
+			response.getWriter().print(practiceInfoJson);
+			//response.getWriter().print(practicesJson);
 		} catch (IOException ex) {
 			ex.printStackTrace();
 		}
