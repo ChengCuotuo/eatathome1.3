@@ -35,7 +35,7 @@ public class InitHomePage {
 						"\", \"menus\":" + menuJson + "}, ");
 			}
 			json.append("{}]");
-			System.out.println(json.toString());
+			//System.out.println(json.toString());
 			response.getWriter().print(json.toString());
 		} catch (JsonProcessingException ex) {
 			ex.printStackTrace();

@@ -3,7 +3,7 @@ package nianzuochen.mybatis.domain;
 import java.io.Serializable;
 import java.util.List;
 
-public class Menu implements Serializable{
+public class Menu  implements Serializable{
 	private String id;			//菜单的编号
 	private String name;		//菜品的名称
 	private String img;			//菜品介绍的图片地址
@@ -43,10 +43,14 @@ public class Menu implements Serializable{
 	public List<Practice> getPractices() {
 		return practices;
 	}
+
+	public void setPractices(List<Practice> practices) {
+		this.practices = practices;
+	}
 	
 	@Override
 	public String toString() {
-		StringBuilder str = new StringBuilder("name: " + this.name + ", img: " + this.img + ", content: " + this.content
+		StringBuilder str = new StringBuilder("id: " + this.id + ", name: " + this.name + ", img: " + this.img + ", content: " + this.content
 				+ ", practice -> [\n");
 		if (practices != null) {
 			for (Practice p : practices) {
