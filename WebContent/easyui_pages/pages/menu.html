@@ -31,6 +31,10 @@
 				//使用全角添加空格
 				$introduce_title.text("　　　　" + data.name);
 				$introduce_img.attr('src', "${pageContext.request.contextPath}/../easyui_pages/pages/images/overview/" + data.img);
+				//创建临时的 img 标签，当图片加载完成之后，使用期高度来修改 #introduce 的高度
+				$("<img/>").attr("src", "${pageContext.request.contextPath}/../easyui_pages/pages/images/overview/" + data.img).load(function() {
+					$('#introduce_content').css('height', this.height * 0.5 + 'px');
+				})
 				$introduce_content.html('');
 				$introduce_content.html(data.content);
 				$practice_title.text('');
@@ -154,7 +158,7 @@
                  style="width:50%; height:100%; float:right; padding-right:50px"
                  alt="介绍图片"/>
             <h3 id="introduce_material">用料</h3>
-            <ul id="introduce_content">
+            <ul id="introduce_content" style="height:440px">
                 <li>汤种部分:</li>
                 <li>高筋面粉</li>
                 <li>20克</li>
@@ -173,7 +177,7 @@
                 <li>沙拉酱适量</li>
             </ul>
         </div>
-
+		
         <div id="practice">
             <h3 id="practice_title">肉松沙拉酱面包（65度汤种）</h3>
             <ul id="practice_content">
