@@ -4,7 +4,9 @@
 <html>
 <head>  
 <meta charset="utf-8">
-<!-- 一秒钟跳转至主页面 -->
+<!-- 一秒钟跳转至主页面
+http://localhost:8080/eatathome1.3/easyui_pages/pages/images/operation/603.jpg
+ -->
 
 <meta http-equiv="refresh" content="1; url=init"/>
 <title>welcome</title>

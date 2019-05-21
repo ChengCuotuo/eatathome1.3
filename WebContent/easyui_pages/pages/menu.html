@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <title>menu</title>
-    <title>dynamic</title>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/../easyui_pages/themes/default/easyui.css">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/../easyui_pages/themes/icon.css">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/../easyui_pages/pages/dynamicstyle.css">
@@ -11,20 +10,43 @@
     <script type="text/javascript" src="${pageContext.request.contextPath}/../easyui_pages/jquery.min.js"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/../easyui_pages/jquery.easyui.min.js"></script>
 	<script type="text/javascript">
-	/*
-	$(function() {
-		//显示菜品的具体做法
-		$('a').click(function(){   	
+	$(function(){
+		//菜品标题
+		var $introduce_title = $('#introduce_title');
+		//菜品图片
+		var $introduce_img = $('#introduce_img');
+		//菜品配料
+		var $introduce_content = $('#introduce_content');
+		//做法标题
+		var $practice_title = $('#practice_title');
+		//做法内容
+		var $practice_content = $('#practice_content');
+		//还需要动态改变 introduce_img 所在父标签的 div 的高度
+		//ajax动态添加的标签无法获取，所以将监听事件绑在父标签上使用 on 方法监听器子标签 a 的点击
+		$('.categoty').on('click','a',function(){
 			var url = this.href;
-			var args = {"time" : new Date()};
-			$.getJSON(url, args, function(data){
-				alert(data.name);
+	        var args = {"time" : new Date()};
+	        $.getJSON(url, args, function(data){
+				$introduce_title.text('');
+				//使用全角添加空格
+				$introduce_title.text("　　　　" + data.name);
+				$introduce_img.attr('src', "${pageContext.request.contextPath}/../easyui_pages/pages/images/overview/" + data.img);
+				$introduce_content.html('');
+				$introduce_content.html(data.content);
+				$practice_title.text('');
+				$practice_title.text(data.name);
+				$practice_content.html('');
+				for(var i = 0; i < data.practices.length; i++) {
+					if (data.practices[i].img) {
+						$practice_content.append('<li>' + data.practices[i].step + '<img src="${pageContext.request.contextPath}/../easyui_pages/pages/images' + data.practices[i].img + '"/></li>');
+					} else {
+						$practice_content.append('<li>' + data.practices[i].step + '</li>');	
+					}
+				}
 			});
-			 return false;
-		}) 
-		
-	})
-	*/
+	        return false;
+	      })
+	    })
     </script>
 
 </head>
@@ -127,10 +149,10 @@
 <div data-options="region:'center',disabled:true">
     <div id="info" style="width:100%">
         <div id="introduce">
-            <h2 id="introduce_title">&nbsp;&nbsp;&nbsp;&nbsp;肉松沙拉酱面包（65度汤种）</h2>
+            <h2 id="introduce_title">　　　　肉松沙拉酱面包（65度汤种）</h2>
             <img id="introduce_img" src="${pageContext.request.contextPath}/../easyui_pages/pages/images/overview/17.jpg"
-                 style="width:50%; float:right; padding-right:50px"
-                 alt="介绍图片" title="肉松沙拉酱面包（65度汤种）"/>
+                 style="width:50%; height:100%; float:right; padding-right:50px"
+                 alt="介绍图片"/>
             <h3 id="introduce_material">用料</h3>
             <ul id="introduce_content">
                 <li>汤种部分:</li>

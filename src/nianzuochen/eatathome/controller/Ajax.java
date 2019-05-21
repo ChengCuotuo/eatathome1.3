@@ -38,6 +38,8 @@ public class Ajax {
 	//获取某个菜品的做法
 	@RequestMapping(value="practice/{formName}")
 	public void getPractices(HttpServletResponse response, @PathVariable String formName) {
+		//设置字符编码
+		response.setCharacterEncoding("utf-8");
 		//获取的数据格式为 json 比较好处理
 		Menu menu = ms.selectMenu(formName);
 		try {
@@ -49,7 +51,7 @@ public class Ajax {
 			//System.out.println(info);
 			//设置返回的数据类型
 			response.setContentType("text/javascript");
-			response.getWriter().print(info);
+	        response.getWriter().print(info);
 		} catch (JsonProcessingException ex) {
 			ex.printStackTrace();
 		} catch (IOException ex) {
