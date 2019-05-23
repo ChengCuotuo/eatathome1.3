@@ -72,9 +72,6 @@ public class Ajax {
 		if(user == null) {
 			return "loginForm.html";
 		} else {
-			StringBuilder info = new StringBuilder();
-			info.append("{\"name\":" + user.getName() + ", \"img\":" + user.getHead() + "}");
-			response.getWriter().print(info.toString());
 			//·µ»ØµÄÊÇ menu.jsp 
 			return "dynamicForm.html";
 		}

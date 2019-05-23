@@ -10,11 +10,6 @@
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/../easyui_pages/pages/dynamicstyle.css">
     <script type="text/javascript" src="${pageContext.request.contextPath}/../easyui_pages/jquery.min.js"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/../easyui_pages/jquery.easyui.min.js"></script>
-	<script type="text/javascript">
-		$(function() {
-			alert("finished");
-		})
-	</script>
 </head>
 <body class="easyui-layout">
     <!-- 这个布局比较复杂，center、west、east
@@ -78,65 +73,36 @@
             </div>
         </div>
     </div>
-    <!-- 导航到菜单信息 -->
-    <div data-options="region:'east',disabled:true" style="width:20%;padding-right: 20px;">
-        <div class="easyui-layout" data-options="fit:true">
-            <div data-options="region:'center',disabled:true" style="width:100%;height:100%">
-                <div class="easyui-accordion" data-options="multiple:false">
-                    <div title="早餐"style="overflow:auto;padding:10px;">
-                        <p><a href="#">土豆火腿早餐饼</a></p>
-                        <p><a href="#">十分钟就做好的懒人双皮奶</a></p>
-                        <p><a href="#">快手香蕉派</a></p>
-                    </div>
-                    <div title="下午茶" style="padding:10px;">
-                        <p><a href="#">黄油曲奇</a></p>
-                        <p><a href="#">葡萄奶酥</a></p>
-                        <p><a href="#">糯米糍</a></p>
-                    </div>
-                    <div title="沙拉" style="padding:10px;">
-                        <p><a href="#">外婆的土豆沙拉</a></p>
-                        <p><a href="#">酸奶水果沙拉</a></p>
-                        <p><a href="#">牛油果沙拉</a></p>
-                    </div>
-                    <div title="主食" style="padding:10px;">
-                        <p><a href="#">香菇油饭</a></p>
-                        <p><a href="#">台式卤肉饭</a></p>
-                        <p><a href="#">可乐饼</a></p>
-                    </div>
-                    <div title="酱" style="padding:10px;">
-                        <p><a href="#">山楂糕－山楂酱</a></p>
-                        <p><a href="#">酱黄豆</a></p>
-                        <p><a href="#">焦糖奶油太妃酱</a></p>
-                    </div>
-                    <div title="凉菜" style="padding:10px;">
-                        <p><a href="#">自制凉皮</a></p>
-                        <p><a href="#">凉拌手撕鸡丝</a></p>
-                        <p><a href="#">手撕杏鲍菇</a></p>
-                    </div>
-                    <div title="甜品" style="padding:10px;">
-                        <p><a href="#">基础泡芙</a></p>
-                        <p><a href="#">少女心的香蕉蔓越莓玛芬</a></p>
-                        <p><a href="#">木瓜椰奶冻</a></p>
-                    </div>
-                    <div title="零食" style="padding:10px;">
-                        <p><a href="#">蛋黄酥（古早味）</a></p>
-                        <p><a href="#">Q弹椰汁千层糕（马蹄糕）</a></p>
-                        <p><a href="#">大理石曲奇</a></p>
-                    </div>
-                    <div title="家常菜" style="padding:10px;">
-                        <p><a href="#">拔丝地瓜</a></p>
-                        <p><a href="#">桂花糯米藕</a></p>
-                        <p><a href="#">饭盒水果盒子蛋糕</a></p>
-                    </div>
-                    <div title="小吃" style="padding:10px;">
-                        <p><a href="#">糯米珍珠丸子</a></p>
-                        <p><a href="#">薯片牛油果大虾沙拉</a></p>
-                        <p><a href="#">爽口拌木耳</a></p>
-                    </div>
+    <!-- 导航到菜单信息
+    设定各个标签的标识 -->
+<div data-options="region:'east',disabled:true" style="width:20%;padding-right: 20px;">
+    <div class="easyui-layout" data-options="fit:true">
+        <div data-options="region:'center',disabled:true" style="width:100%;height:100%">
+            <div id="menu" class="easyui-accordion" data-options="multiple:false">
+                <div class="categoty" id="zc" title="早餐" data-options="href:'menus/zc'" style="overflow:auto;padding:10px;">
+                </div>
+                <div class="categoty" id="xwc" title="下午茶" data-options="href:'menus/xwc'" style="padding:10px;">
+                </div>
+                <div class="categoty" id="sl" title="沙拉" data-options="href:'menus/sl'" style="padding:10px;">
+                </div>
+                <div class="categoty" id="zs" title="主食" data-options="href:'menus/zs'" style="padding:10px;">
+                </div>
+                <div class="categoty" id="jiang" title="酱" data-options="href:'menus/jiang'" style="padding:10px;">
+                </div>
+                <div class="categoty" id="lc" title="凉菜" data-options="href:'menus/lc'" style="padding:10px;">
+                </div>
+                <div class="categoty" id="tp" title="甜品" data-options="href:'menus/tp'" style="padding:10px;">
+                </div>
+                <div class="categoty" id="ls" title="零食" data-options="href:'menus/ls'" style="padding:10px;">
+                </div>
+                <div class="categoty" id="jcc" title="家常菜" data-options="href:'menus/jcc'" style="padding:10px;">
+                </div>
+                <div class="categoty" id="xc" title="小吃" data-options="href:'menus/xc'" style="padding:10px;">
                 </div>
             </div>
         </div>
     </div>
+</div>
     <!-- 动态信息 -->
     <div id="dynamicinfo" data-options="region:'center',disabled:true">
         <div class="dynamic" style="width: 100%;">
