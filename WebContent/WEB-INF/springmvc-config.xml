@@ -27,11 +27,9 @@
 但是当文件和content同一级的时候就找不到了 -->
 	<bean id="viewResolver"
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		 
 		<property name="prefix">
 			<value>easyui_pages/pages/</value>
 		</property>
-		
 	 	<!--
 		<property name="suffix">
 			<value>.jsp</value>

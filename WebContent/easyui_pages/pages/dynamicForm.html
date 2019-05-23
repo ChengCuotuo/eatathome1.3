@@ -3,23 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <title>dynamic</title>
-    <link rel="stylesheet" type="text/css" href="../themes/default/easyui.css">
-    <link rel="stylesheet" type="text/css" href="../themes/icon.css">
-    <link rel="stylesheet" type="text/css" href="dynamicstyle.css">
-    <script type="text/javascript" src="../jquery.min.js"></script>
-    <script type="text/javascript" src="../jquery.easyui.min.js"></script>
-   <script type="text/javascript">
-	$(function() {
-		alert(${pageContext.request.contextPath});
-		$('a').click(function(){   	
-			var url = this.href;
-			var args = {"time" : new Date()};
-			$.getJSON(url, args, function(data){
-				alert(data.name);
-			});
-			 return false;
-		}) 
-	})
+     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/../easyui_pages/themes/default/easyui.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/../easyui_pages/themes/icon.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/../easyui_pages/pages/dynamicstyle.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/../easyui_pages/themes/color.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/../easyui_pages/pages/dynamicstyle.css">
+    <script type="text/javascript" src="${pageContext.request.contextPath}/../easyui_pages/jquery.min.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/../easyui_pages/jquery.easyui.min.js"></script>
+	<script type="text/javascript">
+		$(function() {
+			alert("finished");
+		})
 	</script>
 </head>
 <body class="easyui-layout">
@@ -32,13 +26,13 @@
         <div style="padding:0 20px 0 0;">
             <a href="#" class="easyui-menubutton c6"
                data-options="menu:'#mm1'" style="float:right; margin:20px 20px 0 0;">
-                <img src="images/test.png" style="width:50px; height:50px;"/>
+                <img src="${pageContext.request.contextPath}/../easyui_pages/pages/images/test.png" style="width:50px; height:50px;"/>
             </a>
         </div>
 
         <div id="logo" style="height:100%;width:30%;float:left;">
             <a href="#">
-                <img id="go_homepage" src="images/theme.jpg"
+                <img id="go_homepage" src="${pageContext.request.contextPath}/../easyui_pages/pages/images/theme.jpg"
                      style="height:90%;width:80%; margin:0 0 0 20px; " alt="图片无法显示"/>
             </a>
         </div>
@@ -63,7 +57,7 @@
             <div data-options="region:'north',disabled:true" style="height:40%">
                 <div class="easyui-layout" data-options="fit:true">
                     <div data-options="region:'north'" style="height: 80%; width: 80%;">
-                        <a href="#"><img id="head_img" src="images/test.png"
+                        <a href="#"><img id="head_img" src="${pageContext.request.contextPath}/../easyui_pages/pages/images/test.png"
                              style="width:80%; height:80%;"
                                          alt="图片无法显示"/>
                         </a>
@@ -147,13 +141,13 @@
     <div id="dynamicinfo" data-options="region:'center',disabled:true">
         <div class="dynamic" style="width: 100%;">
             <div class="dynamic_head" style="margin-left: 10%; height:100px">
-                <img class="user_head" src="images/4.jpg" style=""/>
+                <img class="user_head" src="${pageContext.request.contextPath}/../easyui_pages/pages/images/4.jpg" style=""/>
                 <p class="user_name" style="padding-top:20px;">test</p>
                 <p class="user_createtime" >2018-11-1</p>
             </div>
             <div class="dynamic_body" style="margin-left: 10%;">
                 <p class="user_discrib">图片的描述</p>
-                <img class="user_photo" src="images/4.jpg"/>
+                <img class="user_photo" src="${pageContext.request.contextPath}/../easyui_pages/pages/images/4.jpg"/>
             </div>
             <br />
             <div class="dynamic_foot" style="margin-left: 10%;">

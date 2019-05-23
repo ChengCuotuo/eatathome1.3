@@ -25,9 +25,7 @@ public class UserService {
 		session = MySqlSessionFactory.getSqlSession();
 		UserMapper um = session.getMapper(UserMapper.class);
 		um.addUser(user);
-		System.out.print("finish");
 		session.commit();
-		//session.close();
 	}
 	//更新数据库中的用户信息
 	public void updateUser(User user) {
@@ -35,9 +33,7 @@ public class UserService {
 		UserMapper um = session.getMapper(UserMapper.class);
 		um.updateUser(user);
 //System.out.println("finish");
-		session.commit();
-		//session.close();
-		
+		session.commit();	
 	}
 	//查询，如果没有查询到的话返回的是null
 	//查询用户的信息，不查询用户的动态和动态的评论
@@ -47,7 +43,6 @@ public class UserService {
 		User newUser = um.selectSimpleUser(user.getName());
 //System.out.println("finish");
 		session.commit();
-		//session.close();
 		return newUser;
 	}
 	
@@ -57,7 +52,6 @@ public class UserService {
 		UserMapper um = session.getMapper(UserMapper.class);
 		User newUser = um.selectUser(user);
 		session.commit();
-		session.close();
 		return newUser;
 	}
 	
@@ -67,7 +61,6 @@ public class UserService {
 		UserMapper um = session.getMapper(UserMapper.class);
 		um.removeUserById(id);
 		session.commit();
-		//session.close();
 	}
 	
 	//关闭这个会话

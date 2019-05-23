@@ -49,8 +49,13 @@
 				}
 			});
 	        return false;
-	      })
+		})
+		//处理还未登录情况下点击头像的超链接事件
+	    $('.notloginhead').click(function() {
+	    	alert("请先登录");
+	    	return false;
 	    })
+	})
     </script>
 
 </head>
@@ -71,23 +76,23 @@
 
     <div id="logo" style="height:100%;width:30%;float:left;">
         <!-- 主题 -->
-        <a href="#">
+        <a href="init">
             <img id="go_homepage" src="${pageContext.request.contextPath}/../easyui_pages/pages/images/theme.jpg"
                  style="height:90%;width:80%; margin:0 0 0 20px; " alt="图片无法显示"/>
         </a>
     </div>
 
     <div style="height:100%;width:30%; float:left; font-size:20px;">
-        <a href="#" style="color: #ffffff;float:left; padding:40px 50px 0 0;
+        <a class="notloginhead" href="#" style="color: #ffffff;float:left; padding:40px 50px 0 0;
                 text-decoration: none;">查看动态</a>
-        <a href="#" style="color: #ffffff;float:left; padding:40px 50px 0 0;
+        <a class="notloginhead" href="#" style="color: #ffffff;float:left; padding:40px 50px 0 0;
                 text-decoration: none;">发布动态</a>
     </div>
 
     <div id="mm1" style="width:150px;">
         <div class="menu-sep"></div>
-        <div>登陆</div>
-        <div>注册</div>
+        <div><a href="toLoginForm">登陆</a></div>
+        <div><a href="toRegisterForm">注册</a></div>
     </div>
 </div>
 <div data-options="region:'west',disabled:true" style="width:20%;padding-left: 20px;">
@@ -98,7 +103,7 @@
         <div data-options="region:'north',disabled:true" style="height:40%">
             <div class="easyui-layout" data-options="fit:true">
                 <div data-options="region:'north'" style="height: 80%; width: 80%;">
-                    <a href="#"><img id="head_img" src="${pageContext.request.contextPath}/../easyui_pages/pages/images/notknow.jpg"
+                    <a href="toLoginForm"><img id="head_img" src="${pageContext.request.contextPath}/../easyui_pages/pages/images/notknow.jpg"
                                      style="width:100%; height:97%;"
                                      alt="图片无法显示"/>
                     </a>

@@ -3,7 +3,9 @@ package nianzuochen.eatathome.controller;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,6 +17,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import nianzuochen.eatathome.service.MenuService;
 import nianzuochen.mybatis.domain.Menu;
 import nianzuochen.mybatis.domain.Practice;
+import nianzuochen.mybatis.domain.User;
 
 @Controller
 public class Ajax {
@@ -24,7 +27,7 @@ public class Ajax {
 	@RequestMapping(value="menus/{formName}")
 	public void getInfo(HttpServletResponse response, @PathVariable String formName) throws IOException {
 		//设置字符编码
-		response.setCharacterEncoding("utf-8");
+		response.setContentType("text/html; charset=utf-8");
 		ArrayList<Menu> menus = (ArrayList<Menu>)ms.selectSameType(formName);
 		StringBuilder info = new StringBuilder();
 		//<p><a href="practice/zxwc1">黄油曲奇</a></p>
@@ -56,6 +59,24 @@ public class Ajax {
 			ex.printStackTrace();
 		} catch (IOException ex) {
 			ex.printStackTrace();
+		}
+	}
+	
+	//用户登录成功进入动态页面
+	@RequestMapping(value="toDynamicForm")
+	public String toDynamic( HttpServletRequest request, HttpServletResponse response) throws IOException {
+		//登录成功之后返回的数据应该是前 20 条动态 用户的头像 姓名等信息
+		HttpSession session = request.getSession();
+		User user = (User)session.getAttribute("user");
+		
+		if(user == null) {
+			return "loginForm.html";
+		} else {
+			StringBuilder info = new StringBuilder();
+			info.append("{\"name\":" + user.getName() + ", \"img\":" + user.getHead() + "}");
+			response.getWriter().print(info.toString());
+			//返回的是 menu.jsp 
+			return "dynamicForm.html";
 		}
 	}
 }
