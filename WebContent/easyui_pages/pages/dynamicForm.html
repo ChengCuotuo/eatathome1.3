@@ -10,7 +10,25 @@
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/../easyui_pages/pages/dynamicstyle.css">
     <script type="text/javascript" src="${pageContext.request.contextPath}/../easyui_pages/jquery.min.js"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/../easyui_pages/jquery.easyui.min.js"></script>
-
+	<script type="text/javascript">
+		//获取前20条动态来更新页面信息
+		$(function() {
+			var url = "viewDynamics";
+			var args = {'time': new Date()};
+			var $dynamic = $('#dynamic');
+			$.getJSON(url, args, function(data) {
+				$dynamic.empty();
+				$dynamic.append('<div class="dynamic_head"></div>')
+					.append('<img class="user_head" src="${pageContext.request.contextPath}/../easyui_pages/pages/images/dynamic/'+ data[0].photo + '"/>');
+				$dynamic.append("<div></div>").addClass('dynamic_body');
+				$dynamic.append("<div></div>").addClass('dynamic_foot');
+				$dynamic.append("<div></div>").addClass('dynamic_common');
+				$dynamic.append("<hr />");
+				//用它来重新加载所在标签的样式
+				$dynamic.trigger("create");
+			})
+		})
+	</script>
 </head>
 <body class="easyui-layout">
     <!-- 这个布局比较复杂，center、west、east
@@ -34,11 +52,11 @@
         </div>
 
         <div style="height:100%;width:30%; float:left; font-size:20px;">
-            <a href="#" style="color: #ffffff;float:left; padding:40px 50px 0 0;
+            <a href="toDynamicForm" style="color: #ffffff;float:left; padding:40px 50px 0 0;
                 text-decoration: none;">查看动态</a>
-            <a href="#" style="color: #ffffff;float:left; padding:40px 50px 0 0;
+            <a href="releaseDynamic" style="color: #ffffff;float:left; padding:40px 50px 0 0;
                 text-decoration: none;">发布动态</a>
-			<a href="#" style="color: #ffffff;float:left; padding:40px 50px 0 0;
+			<a href="init" style="color: #ffffff;float:left; padding:40px 50px 0 0;
                 text-decoration: none;">查看菜谱</a>
 		</div>
 
@@ -97,46 +115,43 @@
     </div>
 </div>
     <div id="dynamicinfo" data-options="region:'center',disabled:true">
-        <div class="dynamic" style="width: 100%;">
-            <div class="dynamic_head" style="margin-left: 10%; height:100px">
-                <img class="user_head" src="${pageContext.request.contextPath}/../easyui_pages/pages/images/4.jpg" style=""/>
-                <p class="user_name" style="padding-top:20px;">test</p>
+        <div id="dynamic" style="width: 100%;">
+            <div class="dynamic_head">
+                <img class="user_head" src="${pageContext.request.contextPath}/../easyui_pages/pages/images/4.jpg"/>
+                <p class="user_name">test</p>
                 <p class="user_createtime" >2018-11-1</p>
             </div>
-            <div class="dynamic_body" style="margin-left: 10%;">
+            <div class="dynamic_body">
                 <p class="user_discrib">图片的描述</p>
                 <img class="user_photo" src="${pageContext.request.contextPath}/../easyui_pages/pages/images/4.jpg"/>
             </div>
             <br />
-            <div class="dynamic_foot" style="margin-left: 10%;">
+            <div class="dynamic_foot">
                 <form action="evaluate" method="post" id="good_bad">
-                    <button type="submit" name="good" title="good"
-                            style="width:65px;height:45px;background-image: url('${pageContext.request.contextPath}/../easyui_pages/pages/images/good.png')">
+                    <button class="good" type="submit" name="good" title="good">
                         12
                     </button>
 
-                    <button type="submit" name="bad" title="bad"
-                            style="width:65px;height:45px;background-image: url('${pageContext.request.contextPath}/../easyui_pages/pages/images/bad.png')">
+                    <button class="bad" type="submit" name="bad" title="bad">
                         5
                     </button>
                 </form>
 
                 <!--用户评论框-->
                 <form action="mycom" method="post" id="myidea">
-                    <input type="text" style="width:80%; height:30px;" name="comment"/>
-                    <input type="submit" value="评论" style="width:60px; height:35px; color:#F00;" name="submitcommin"/>
+                    <input class="inputcommon" type="text" name="comment"/>
+                    <input class="submitcommon" type="submit" value="评论" name="submitcommin"/>
                     <input type="hidden" value="动态的id" name="dynamic_id"/>
                     <input type="hidden" value="当前用户的id" name="common_user_id">
                 </form>
             </div>
 
-            <div class="dynamic_common" style="margin-left: 10%">
+            <div class="dynamic_common">
                 <p class="common">nianzuochen: 有美女</p>
                 <p class="common">nianzuochen: 出没</p>
             </div>
+            <hr />
         </div>
-
-        <hr />
     </div>
 
 </body>

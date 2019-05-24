@@ -41,13 +41,13 @@
 		<association property="dynamicUser" column="DUId"
 			javaType="nianzuochen.mybatis.domain.User"
 			select="nianzuochen.mybatis.mapper.UserMapper.selectSimpleUserById"
-			fetchType="lazy">
+			fetchType="eager">
 		</association>
 		<!-- 动态的评论，将动态的id作为参数传递 -->
 		<collection property="commons" column="DId"
 			javaType="ArrayList" ofType="nianzuochen.mybatis.domain.Common"
 			select="nianzuochen.mybatis.mapper.CommonMapper.selectCommonsById"
-			fetchType="lazy">	
+			fetchType="eager">	
 		</collection>
 	</resultMap>
 	<!-- 按照时间排序查出前20条动态，及其评论 这里有一个错误，

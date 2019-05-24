@@ -9,13 +9,13 @@ public class Common implements Serializable{
 	private Integer common_user_id;	//评论用户的id
 	private String comment;			//评论的内容
 	private Timestamp date;			//评论的时间
-	private User commonUser;		//评论的用户的信息
+	private String commonUser;		//评论的用户的信息
 	
-	public User getCommonUser() {
+	public String getCommonUser() {
 		return commonUser;
 	}
 
-	public void setCommonUser(User commonUser) {
+	public void setCommonUser(String commonUser) {
 		this.commonUser = commonUser;
 	}
 

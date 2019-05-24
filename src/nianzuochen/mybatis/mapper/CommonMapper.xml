@@ -13,10 +13,11 @@
 		<result property="common_user_id" column="CUId"/>
 		<result property="comment" column="CComent"/>
 		<result property="date" column="CComDate"/>
-		<!-- 要根据CUId查询出评论的用户的信息，仅仅是用户的信息，没有用户的动态 -->
+		<!-- 要根据CUId查询出评论的用户的信息，仅仅是用户的信息 -->
 		<association property="commonUser" column="CUId" 
 			javaType="nianzuochen.mybatis.domain.User"
-			select="nianzuochen.mybatis.mapper.UserMapper.selectSimpleUserById">
+			select="nianzuochen.mybatis.mapper.UserMapper.selectUserNameById"
+			fetchType="eager">
 		</association>
 	</resultMap>
 	

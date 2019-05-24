@@ -37,6 +37,12 @@
 		resultMap="simpleUserResultMap">
 		SELECT * FROM t_user WHERE UId = #{id}
 	</select>
+	
+	<!-- 使用用户的id进行查询用户的姓名 -->
+	<select id="selectUserNameById" parameterType="int" resultType="String">
+		SELECT UName FROM t_user WHERE UId = #{id}
+	</select>
+	
 	<!-- 简单查询用户的信息，没有动态 -->
 	<select id="selectSimpleUser" parameterType="string"
 		resultMap="simpleUserResultMap">
@@ -73,7 +79,7 @@
 		<collection property="dynamics" column="UId" 
 			javaType="ArrayList" ofType="nianzuochen.mybatis.domain.Dynamic"
 			select="nianzuochen.mybatis.mapper.DynamicMapper.selectDynamicByUserId"
-			fetchType="lazy">
+			fetchType="eager">
 		</collection>
 	</resultMap>
 </mapper>

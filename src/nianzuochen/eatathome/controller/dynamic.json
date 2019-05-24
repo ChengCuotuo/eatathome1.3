@@ -1,0 +1,139 @@
+[{
+	"id": 4,
+	"user_id": 2,
+	"describe": "蒋老师在上.net",
+	"photo": "chunlei1552374775559.jpg",
+	"date": 1558588131000,
+	"upCount": 0,
+	"downCount": 0,
+	"dynamicUser": {
+		"id": 2,
+		"name": "chunlei",
+		"password": "123",
+		"age": 18,
+		"gender": "man",
+		"head": "chunlei.jpg",
+		"signature": "我家的狗还是很威武的",
+		"delete": 0,
+		"createDate": 1558588076000,
+		"dynamics": null,
+		"signatory": "我家的狗还是很威武的"
+	},
+	"commons": []
+}, {
+	"id": 5,
+	"user_id": 2,
+	"describe": "请相信，这不是一节英语课。",
+	"photo": "chunlei1552438534405.jpg",
+	"date": 1558588131000,
+	"upCount": 2,
+	"downCount": 0,
+	"dynamicUser": {
+		"id": 2,
+		"name": "chunlei",
+		"password": "123",
+		"age": 18,
+		"gender": "man",
+		"head": "chunlei.jpg",
+		"signature": "我家的狗还是很威武的",
+		"delete": 0,
+		"createDate": 1558588076000,
+		"dynamics": null,
+		"signatory": "我家的狗还是很威武的"
+	},
+	"commons": [{
+		"id": 2,
+		"dynamic_id": 5,
+		"common_user_id": 2,
+		"comment": "hhh",
+		"date": 1558588171000,
+		"commonUser": "chunlei"
+	}, {
+		"id": 3,
+		"dynamic_id": 5,
+		"common_user_id": 2,
+		"comment": "今天",
+		"date": 1558588171000,
+		"commonUser": "chunlei"
+	}, {
+		"id": 4,
+		"dynamic_id": 5,
+		"common_user_id": 2,
+		"comment": "怎么回事都是乱码",
+		"date": 1558588171000,
+		"commonUser": "chunlei"
+	}]
+}, {
+	"id": 1,
+	"user_id": 1,
+	"describe": "为了解决乱码问题，我已经快要烦死了",
+	"photo": "test1552352220736.jpg",
+	"date": 1558588130000,
+	"upCount": 0,
+	"downCount": 0,
+	"dynamicUser": {
+		"id": 1,
+		"name": "test",
+		"password": "123",
+		"age": 18,
+		"gender": "man",
+		"head": "test.jpg",
+		"signature": "再忙也要记得抽空回家吃饭",
+		"delete": 0,
+		"createDate": 1558588076000,
+		"dynamics": null,
+		"signatory": "再忙也要记得抽空回家吃饭"
+	},
+	"commons": [{
+		"id": 1,
+		"dynamic_id": 1,
+		"common_user_id": 2,
+		"comment": "换个头像",
+		"date": 1558588171000,
+		"commonUser": "chunlei"
+	}]
+}, {
+	"id": 2,
+	"user_id": 1,
+	"describe": "上课调试程序，没有认真听课。看到黑板上的东西，有点后悔，还是应该好好上课。",
+	"photo": "test1552352311849.jpg",
+	"date": 1558588130000,
+	"upCount": 0,
+	"downCount": 0,
+	"dynamicUser": {
+		"id": 1,
+		"name": "test",
+		"password": "123",
+		"age": 18,
+		"gender": "man",
+		"head": "test.jpg",
+		"signature": "再忙也要记得抽空回家吃饭",
+		"delete": 0,
+		"createDate": 1558588076000,
+		"dynamics": null,
+		"signatory": "再忙也要记得抽空回家吃饭"
+	},
+	"commons": []
+}, {
+	"id": 3,
+	"user_id": 2,
+	"describe": "齐齐哈尔大学中区",
+	"photo": "chunlei1552365602036.jpg",
+	"date": 1558588130000,
+	"upCount": 0,
+	"downCount": 0,
+	"dynamicUser": {
+		"id": 2,
+		"name": "chunlei",
+		"password": "123",
+		"age": 18,
+		"gender": "man",
+		"head": "chunlei.jpg",
+		"signature": "我家的狗还是很威武的",
+		"delete": 0,
+		"createDate": 1558588076000,
+		"dynamics": null,
+		"signatory": "我家的狗还是很威武的"
+	},
+	"commons": []
+}]

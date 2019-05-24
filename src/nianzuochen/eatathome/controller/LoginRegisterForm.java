@@ -25,11 +25,6 @@ public class LoginRegisterForm {
 		return "loginForm.html";
 	}
 	
-	@RequestMapping(value="toRegisterForm")
-	public String forwardRegisterForm() {
-		return "registForm.html";
-	}
-	
 	// 处理用户注册 register
 	@RequestMapping(value="register", method=RequestMethod.POST)
 	public void UserRegister(HttpServletResponse response,

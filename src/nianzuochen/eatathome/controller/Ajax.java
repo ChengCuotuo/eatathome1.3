@@ -106,11 +106,11 @@ public class Ajax {
 		User user = (User)session.getAttribute("user");
 		StringBuilder info = new StringBuilder();
 		if (user == null) {
-			info.append("{\"result\": \"null\"");
+			info.append("{\"result\": \"null\"}");
 		} else {
 			info.append("{\"result\":\"has\", \"userName\":\"" + user.getName() + "\", \"img\":\"" + user.getHead() + "\" }");
 			//System.out.println(info.toString());
-			response.getWriter().print(info.toString());
 		}
+		response.getWriter().print(info.toString());
 	}
 }

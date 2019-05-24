@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import nianzuochen.mybatis.domain.Dynamic;
 import nianzuochen.mybatis.factory.MySqlSessionFactory;
 import nianzuochen.mybatis.mapper.DynamicMapper;
@@ -21,13 +23,20 @@ public class TestDynamicMapper {
 //		for (Dynamic dyn : dynamics) {
 //			System.out.println(dyn);
 //		}
+		try {
+			ObjectMapper mapper = new ObjectMapper();
+			String str = mapper.writeValueAsString(dynamics);
+			System.out.println(str);
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
 		
 		
 		//修改已经查询到的一条动态的好评 加一
-		Dynamic dynamic = dynamics.get(1);
-		dynamic.setUpCount(dynamic.getUpCount() + 1);
-		tm.testUpdateUserUpCount(session, dynamic);
-		
+//		Dynamic dynamic = dynamics.get(1);
+//		dynamic.setUpCount(dynamic.getUpCount() + 1);
+//		tm.testUpdateUserUpCount(session, dynamic);
+//		
 		//修改已经查询到的一条动态的差评 加一
 //		dynamic = dynamics.get(2);
 //		dynamic.setDownCount(dynamic.getDownCount() + 1);

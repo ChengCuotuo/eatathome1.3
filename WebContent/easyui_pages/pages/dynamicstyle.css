@@ -1,21 +1,62 @@
-.dynamic .dynamic_head .user_head {
+#dynamic .dynamic_head {
+	margin-left: 10%; 
+	height:100px;
+}
+
+#dynamic .dynamic_head .user_head {
     margin-right:20px;float:left;
     height:100%;
     width:20%;
-    /*设置圆角*/
     -moz-border-radius:50%;
     -webkit-border-radius:50%;
     border-radius:50%;
 }
 
-.dynamic .dynamic_body .user_photo{
+#dynamic .dynamic_head .username {
+	padding-top:20px;	
+}
+
+#dynamic .dynamic_body {
+	margin-left: 10%;
+}
+
+#dynamic .dynamic_body .user_photo{
     width: 80%;
-    /*设置圆角*/
     -moz-border-radius:12px;
     -webkit-border-radius:12px;
     border-radius:12px;
-    /*设置圆角阴影*/
     -moz-box-shadow:5px 5px #a6a29e;
     -webkit-box-shadow: 5px 5px #a6a29e;
     box-shadow: 5px 5px #a6a29e;
+}
+
+#dynamic .dynamic_foot {
+	margin-left: 10%;
+}
+
+#dynamic .dynamic_foot .good {
+	width:65px;
+	height:45px;
+	background-image: url("${pageContext.request.contextPath}/../images/good.png");
+}
+
+#dynamic .dynamic_foot .bad {
+	width:65px;
+	height:45px;
+	background-image: url("${pageContext.request.contextPath}/../images/bad.png");
+}
+
+#dynamic .dynamic_foot .inputcommon {
+	width:80%;
+	height:30px;
+}
+
+#dynamic .dynamic_foot .submitcommon {
+	width:60px;
+	height:35px;
+	color:#F00;
+}
+
+#dynamic .dynamic_common {
+	margin-left: 10%;
 }
