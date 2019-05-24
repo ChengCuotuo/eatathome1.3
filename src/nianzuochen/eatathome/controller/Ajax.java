@@ -64,7 +64,7 @@ public class Ajax {
 	
 	@RequestMapping(value="tomenus{formName}")
 	public void toMenuForm(HttpServletResponse response, @PathVariable String formName) throws IOException {
-		System.out.println("tomenus");
+		//System.out.println("tomenus");
 		//设置字符编码
 		response.setContentType("text/html; charset=utf-8");
 		ArrayList<Menu> menus = (ArrayList<Menu>)ms.selectSameType(formName);
@@ -95,6 +95,22 @@ public class Ajax {
 		} else {
 			//返回的是 menu.jsp 
 			return "dynamicForm.html";
+		}
+	}
+	
+	//menu 信息更新
+	@RequestMapping(value="getuserinfo")
+	public void updateUserInfo(HttpServletResponse response, HttpServletRequest request) throws IOException {
+		response.setCharacterEncoding("utf-8");
+		HttpSession session = request.getSession();
+		User user = (User)session.getAttribute("user");
+		StringBuilder info = new StringBuilder();
+		if (user == null) {
+			info.append("{\"result\": \"null\"");
+		} else {
+			info.append("{\"result\":\"has\", \"userName\":\"" + user.getName() + "\", \"img\":\"" + user.getHead() + "\" }");
+			//System.out.println(info.toString());
+			response.getWriter().print(info.toString());
 		}
 	}
 }
