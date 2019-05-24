@@ -62,6 +62,27 @@ public class Ajax {
 		}
 	}
 	
+	@RequestMapping(value="tomenus{formName}")
+	public void toMenuForm(HttpServletResponse response, @PathVariable String formName) throws IOException {
+		System.out.println("tomenus");
+		//设置字符编码
+		response.setContentType("text/html; charset=utf-8");
+		ArrayList<Menu> menus = (ArrayList<Menu>)ms.selectSameType(formName);
+		StringBuilder info = new StringBuilder();
+		//<p><a href="practice/zxwc1">黄油曲奇</a></p>
+		for (Menu m : menus) {
+			info.append("<p><a href=\"toMenuPractice/" +m.getId() + "\">" + m.getName() + "</a></p>");
+		}
+		//System.out.println(info.toString());
+		response.getWriter().print(info.toString());
+	}
+	
+	//获取某个菜品的做法
+	@RequestMapping(value="toMenuPractice/{formName}")
+	public String toMenuPractice(HttpServletResponse response) {
+		return "menu.html";
+	}
+	
 	//用户登录成功进入动态页面
 	@RequestMapping(value="toDynamicForm")
 	public String toDynamic( HttpServletRequest request, HttpServletResponse response) throws IOException {

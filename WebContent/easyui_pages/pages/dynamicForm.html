@@ -10,6 +10,7 @@
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/../easyui_pages/pages/dynamicstyle.css">
     <script type="text/javascript" src="${pageContext.request.contextPath}/../easyui_pages/jquery.min.js"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/../easyui_pages/jquery.easyui.min.js"></script>
+
 </head>
 <body class="easyui-layout">
     <!-- 这个布局比较复杂，center、west、east
@@ -37,6 +38,8 @@
                 text-decoration: none;">查看动态</a>
             <a href="#" style="color: #ffffff;float:left; padding:40px 50px 0 0;
                 text-decoration: none;">发布动态</a>
+			<a href="#" style="color: #ffffff;float:left; padding:40px 50px 0 0;
+                text-decoration: none;">查看菜谱</a>
 		</div>
 
         <div id="mm1" style="width:150px;">
@@ -78,32 +81,21 @@
 <div data-options="region:'east',disabled:true" style="width:20%;padding-right: 20px;">
     <div class="easyui-layout" data-options="fit:true">
         <div data-options="region:'center',disabled:true" style="width:100%;height:100%">
-            <div id="menu" class="easyui-accordion" data-options="multiple:false">
-                <div class="categoty" id="zc" title="早餐" data-options="href:'menus/zc'" style="overflow:auto;padding:10px;">
-                </div>
-                <div class="categoty" id="xwc" title="下午茶" data-options="href:'menus/xwc'" style="padding:10px;">
-                </div>
-                <div class="categoty" id="sl" title="沙拉" data-options="href:'menus/sl'" style="padding:10px;">
-                </div>
-                <div class="categoty" id="zs" title="主食" data-options="href:'menus/zs'" style="padding:10px;">
-                </div>
-                <div class="categoty" id="jiang" title="酱" data-options="href:'menus/jiang'" style="padding:10px;">
-                </div>
-                <div class="categoty" id="lc" title="凉菜" data-options="href:'menus/lc'" style="padding:10px;">
-                </div>
-                <div class="categoty" id="tp" title="甜品" data-options="href:'menus/tp'" style="padding:10px;">
-                </div>
-                <div class="categoty" id="ls" title="零食" data-options="href:'menus/ls'" style="padding:10px;">
-                </div>
-                <div class="categoty" id="jcc" title="家常菜" data-options="href:'menus/jcc'" style="padding:10px;">
-                </div>
-                <div class="categoty" id="xc" title="小吃" data-options="href:'menus/xc'" style="padding:10px;">
-                </div>
-            </div>
+            <ul style="list-style: none;;padding-left: 10px">
+                <li>天天：</li>
+                <li>&nbsp;&nbsp;&nbsp;&nbsp;大江东去浪淘尽多少英雄</li>
+                <br/>
+                <li>乐乐：</li>
+                <li>&nbsp;&nbsp;&nbsp;&nbsp;这是最好的时代，这是最坏的时代</li>
+                <br/>
+                <li>龙应台：</li>
+                <li>&nbsp;&nbsp;&nbsp;&nbsp;我慢慢地、慢慢地了解到，所谓父女母子一场，只不过意味着，你和他的缘分就是：
+		                    今生今世不断地在目送他的背影渐行渐远。你站立在小路的这一端，看着他逐渐消失在小路转弯的地方，
+		                    而且，他用背影默默告诉你：不必追。</li>
+            </ul>
         </div>
     </div>
 </div>
-    <!-- 动态信息 -->
     <div id="dynamicinfo" data-options="region:'center',disabled:true">
         <div class="dynamic" style="width: 100%;">
             <div class="dynamic_head" style="margin-left: 10%; height:100px">
@@ -119,12 +111,12 @@
             <div class="dynamic_foot" style="margin-left: 10%;">
                 <form action="evaluate" method="post" id="good_bad">
                     <button type="submit" name="good" title="good"
-                            style="width:65px;height:45px;background-image: url('images/good.png')">
+                            style="width:65px;height:45px;background-image: url('${pageContext.request.contextPath}/../easyui_pages/pages/images/good.png')">
                         12
                     </button>
 
                     <button type="submit" name="bad" title="bad"
-                            style="width:65px;height:45px;background-image: url('images/bad.png')">
+                            style="width:65px;height:45px;background-image: url('${pageContext.request.contextPath}/../easyui_pages/pages/images/bad.png')">
                         5
                     </button>
                 </form>
