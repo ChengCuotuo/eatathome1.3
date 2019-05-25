@@ -136,14 +136,6 @@ public class User implements Serializable{
 		this.head = head;
 	}
 
-	public String getSignatory() {
-		return signature;
-	}
-
-	public void setSignatory(String signature) {
-		this.signature = signature;
-	}
-
 	public Integer getDelete() {
 		return delete;
 	}

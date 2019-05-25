@@ -52,12 +52,8 @@
 		<id property="id" column="UId"/>
 		<result property="name" column="UName"/>
 		<result property="age" column="UAge"/>
-		<result property="password" column="UPassword"/>
-		<result property="gender" column="UGender"/>
 		<result property="head" column="UHead"/>
 		<result property="signature" column="USignature"/>
-		<result property="delete" column="UDel"/>
-		<result property="createDate" column="UCreateDate"/>	
 	</resultMap>
 	
 	<!-- 使用用户的id查询用户的信息，同时查出用户的动态以及动态的评论 -->

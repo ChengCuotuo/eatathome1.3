@@ -20,16 +20,16 @@ public class TestDynamicMapper {
 		//tm.addDynamic(session, dynamic);
 		
 		List<Dynamic> dynamics = tm.testSelectTwentyDynamics(session);
-//		for (Dynamic dyn : dynamics) {
-//			System.out.println(dyn);
-//		}
-		try {
-			ObjectMapper mapper = new ObjectMapper();
-			String str = mapper.writeValueAsString(dynamics);
-			System.out.println(str);
-		} catch (Exception ex) {
-			ex.printStackTrace();
+		for (Dynamic dyn : dynamics) {
+			System.out.println(dyn);
 		}
+//		try {
+//			ObjectMapper mapper = new ObjectMapper();
+//			String str = mapper.writeValueAsString(dynamics);
+//			System.out.println(str);
+//		} catch (Exception ex) {
+//			ex.printStackTrace();
+//		}
 		
 		
 		//修改已经查询到的一条动态的好评 加一

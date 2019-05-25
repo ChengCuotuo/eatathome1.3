@@ -9,15 +9,14 @@
 	"dynamicUser": {
 		"id": 2,
 		"name": "chunlei",
-		"password": "123",
+		"password": null,
 		"age": 18,
-		"gender": "man",
+		"gender": null,
 		"head": "chunlei.jpg",
 		"signature": "我家的狗还是很威武的",
-		"delete": 0,
-		"createDate": 1558588076000,
-		"dynamics": null,
-		"signatory": "我家的狗还是很威武的"
+		"delete": null,
+		"createDate": null,
+		"dynamics": null
 	},
 	"commons": []
 }, {
@@ -31,15 +30,14 @@
 	"dynamicUser": {
 		"id": 2,
 		"name": "chunlei",
-		"password": "123",
+		"password": null,
 		"age": 18,
-		"gender": "man",
+		"gender": null,
 		"head": "chunlei.jpg",
 		"signature": "我家的狗还是很威武的",
-		"delete": 0,
-		"createDate": 1558588076000,
-		"dynamics": null,
-		"signatory": "我家的狗还是很威武的"
+		"delete": null,
+		"createDate": null,
+		"dynamics": null
 	},
 	"commons": [{
 		"id": 2,
@@ -74,15 +72,14 @@
 	"dynamicUser": {
 		"id": 1,
 		"name": "test",
-		"password": "123",
+		"password": null,
 		"age": 18,
-		"gender": "man",
+		"gender": null,
 		"head": "test.jpg",
 		"signature": "再忙也要记得抽空回家吃饭",
-		"delete": 0,
-		"createDate": 1558588076000,
-		"dynamics": null,
-		"signatory": "再忙也要记得抽空回家吃饭"
+		"delete": null,
+		"createDate": null,
+		"dynamics": null
 	},
 	"commons": [{
 		"id": 1,
@@ -103,15 +100,14 @@
 	"dynamicUser": {
 		"id": 1,
 		"name": "test",
-		"password": "123",
+		"password": null,
 		"age": 18,
-		"gender": "man",
+		"gender": null,
 		"head": "test.jpg",
 		"signature": "再忙也要记得抽空回家吃饭",
-		"delete": 0,
-		"createDate": 1558588076000,
-		"dynamics": null,
-		"signatory": "再忙也要记得抽空回家吃饭"
+		"delete": null,
+		"createDate": null,
+		"dynamics": null
 	},
 	"commons": []
 }, {
@@ -125,15 +121,14 @@
 	"dynamicUser": {
 		"id": 2,
 		"name": "chunlei",
-		"password": "123",
+		"password": null,
 		"age": 18,
-		"gender": "man",
+		"gender": null,
 		"head": "chunlei.jpg",
 		"signature": "我家的狗还是很威武的",
-		"delete": 0,
-		"createDate": 1558588076000,
-		"dynamics": null,
-		"signatory": "我家的狗还是很威武的"
+		"delete": null,
+		"createDate": null,
+		"dynamics": null
 	},
 	"commons": []
 }]

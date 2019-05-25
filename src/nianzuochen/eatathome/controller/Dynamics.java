@@ -27,6 +27,7 @@ public class Dynamics {
 			ObjectMapper mapper = new ObjectMapper();
 			String info = mapper.writeValueAsString(dynamics);
 			response.getWriter().print(info);
+			//System.out.println(info);
 		} catch (JsonProcessingException ex) {
 			ex.printStackTrace();
 		} catch (IOException ex) {

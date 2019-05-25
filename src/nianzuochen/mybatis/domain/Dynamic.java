@@ -66,8 +66,8 @@ public class Dynamic implements Serializable{
 		this.photo = photo;
 	}
 
-	public Timestamp getDate() {
-		return date;
+	public String getDate() {
+		return date.toString();
 	}
 
 	public void setDate(Timestamp date) {
@@ -109,7 +109,7 @@ public class Dynamic implements Serializable{
 	@Override
 	public String toString() {
 		StringBuffer result = new StringBuffer("Dynamic->[" + this.dynamicUser + this.describe + ", " +this.user_id +
-				", " + this.upCount + ", " + this.downCount + ", ");
+				", " + this.upCount + ", " + this.downCount + ", " + this.date.toString() + ", ");
 		for (Common com : commons) {
 			result.append("\n\t Common->[" + com.getComment() + ", " + com.getDynamic_id() + "]");
 		}

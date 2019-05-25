@@ -64,7 +64,7 @@
 		$.getJSON(url, args, function(data) {
 			if (data.result == 'null') {
 				$('.notloginhead').click(function() {
-			    	alert("请先登录");
+					window.location.href="toLoginForm";
 			    	return false;
 			    })
 			} else {
@@ -74,7 +74,7 @@
 				$choose2.attr('href', 'changepassword');
 				$choose2.text('修改密码');
 				//注意这里 ${pageContext.request.contextPath} 需要使用 "" 不能使用''
-				$head_img.attr('src', "${pageContext.request.contextPath}/../easyui_pages/pages/images/" + data.img);
+				$head_img.attr('src', "${pageContext.request.contextPath}/../easyui_pages/pages/images/user/" + data.img);
 				$head_img.parent().attr('href', '#');
 			}
 		})
@@ -127,9 +127,10 @@
         <div data-options="region:'north',disabled:true" style="height:40%">
             <div class="easyui-layout" data-options="fit:true">
                 <div data-options="region:'north'" style="height: 80%; width: 80%;">
-                    <a href="toLoginForm"><img class="head_img" src="${pageContext.request.contextPath}/../easyui_pages/pages/images/notknow.jpg"
-                                     style="width:100%; height:97%;"
-                                     alt="图片无法显示"/>
+                    <a href="toLoginForm">
+                    <img class="head_img" src="${pageContext.request.contextPath}/../easyui_pages/pages/images/notknow.jpg"
+                         style="width:100%; height:97%;"
+                         alt="图片无法显示"/>
                     </a>
                 </div>
                 <div data-options="region:'center'" >
