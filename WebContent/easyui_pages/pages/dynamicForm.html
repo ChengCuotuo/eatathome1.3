@@ -11,8 +11,75 @@
     <script type="text/javascript" src="${pageContext.request.contextPath}/../easyui_pages/jquery.min.js"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/../easyui_pages/jquery.easyui.min.js"></script>
 	<script type="text/javascript">
-		//获取前20条动态来更新页面信息
 		$(function() {
+			// 响应文件上传的事件，上传的只能是图片，也就是文件的扩展名是 .jpg .png .gif
+            // 上传的文件大小也要有限制
+            // 同时上传的还有描述
+            var $describe = $('#describe');
+            var $photo = $("input[name='photo']");
+            var $upload = $("input[name='upload']");
+            var $showphoto = $('#showphoto');
+            var add = true;
+            var imageVal = null;    //保存内容上传文件的时候需要
+            $describe.val('');	//初始化的时候描述的内容为空
+            
+            $('#choose a').on('click', function(){
+            	if (add) {
+            		alert("未选择图片");
+            	} else {
+            		//在这里还需要将多行文本框中的数据传递到后台
+            		var text = $describe.val();
+            		var url = "storeDescribe?describe=" + text;
+            		var args = {'time' : new Date()};
+            		$.getJSON(url, args, function(data) {
+            			if (data.result == "success") {
+            				document.forms[0].submit();
+            			} else {
+            				alert("失败");
+            			}
+            		})
+            	}
+            })
+            
+            //当选中图片的时候要把选中的图片显示在下面
+            $photo.on("change",function(){
+                var objUrl = getObjectURL(this.files[0]) ; //获取图片的路径，该路径不是图片在本地的路径
+                if (add) {
+                    $showphoto.append('<img style="width:100px;" src="' + objUrl + '" />');
+                    imageVal = $photo.val();
+                    //alert(imageVal);
+                    add = false;
+                    $choose.attr('action', 'uploadPhoto');
+                } else {
+                    alert("最多上传一张图片");
+                }
+            })
+            
+            $('#uploadButton').click(function() {
+                //alert("hello");
+                //alert($describe.val());
+                if ($photo.val() == '') {
+                    alert("请选择图片");
+                } else {
+                	window.location.href="releaseDynamic";
+                }
+                return false;
+            })
+            //获取文件的路径
+            function getObjectURL(file) {
+                var url = null ;
+                if (window.createObjectURL!=undefined) {// basic
+                    url = window.createObjectURL(file) ;
+                } else if (window.URL!=undefined) { // mozilla(firefox)
+                    url = window.URL.createObjectURL(file) ;
+                } else if (window.webkitURL!=undefined) { // webkit or chrome
+                    url = window.webkitURL.createObjectURL(file) ;
+                }
+                return url ;
+            }
+            
+            
+          	//获取前20条动态来更新页面信息
 			//修改页面用户的头像和姓名等信息
 			var $head_img = $('.head_img');
 			var $userName = $('#userName');
@@ -158,6 +225,24 @@
     </div>
 </div>
     <div id="dynamicinfo" data-options="region:'center',disabled:true">
+    	<!-- 发布动态 -->
+        <div id="releaseDynamic" class="easyui-panel" style="padding:10px 0 10px 10px;margin:10px 0;">
+	        <input id="describe" class="easyui-textbox" label="动态描述：" labelPosition="top"
+	               multiline="true" name="describe" value="" style="width:80%;height:80px"
+	               data-options="prompt:'描述你的心情..'">
+	        
+	        <br /><br />
+	        <!-- 选择并上传图片-->
+	        <form id="choose" action="releaseDynamic" method="post" enctype="multipart/form-data">
+        		<input type="file" name="photo"/>
+        		<a class="easyui-linkbutton" data-options="iconCls:'icon-flay'">发布</a>
+    		</form>
+	        <!-- 将选中的图片缩小并显示在下面 未选中之前应该是不存在的-->
+	         <div id="showphoto" class="easyui-panel"
+	              style="display:none;padding:5px 0 5px 10px;margin:10px 0;width:80%;">
+	
+	        </div>
+    	</div>
         <div id="dynamic" style="width: 100%;">
         </div>
     </div>
