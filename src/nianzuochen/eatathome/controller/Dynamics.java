@@ -17,13 +17,16 @@ import org.springframework.web.multipart.MultipartFile;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import nianzuochen.eatathome.service.CommonService;
 import nianzuochen.eatathome.service.DynamicService;
+import nianzuochen.mybatis.domain.Common;
 import nianzuochen.mybatis.domain.Dynamic;
 import nianzuochen.mybatis.domain.User;
 
 @Controller
 public class Dynamics {
 	private DynamicService ds = new DynamicService();
+	private CommonService cs = new CommonService();
 	
 	//刷新动态，显示前20条动态
 	@RequestMapping(value="viewDynamics")
@@ -60,12 +63,16 @@ public class Dynamics {
 			try {
 				//将上传的文件存储，从session中获取描述和当前用户的信息上传到数据库
 				file.transferTo(new File(filePath + fileName));
-				//System.out.println(storePath.getParentFile());
+				//现在图片已经上传到了服务器中 描述也已经保存在了 session 中，可以向数据库中写入该条信息了
+				User user = (User)session.getAttribute("user");
+				String describe = (String)session.getAttribute("describe");
+				Dynamic dynamic = new Dynamic(user.getId(), describe, fileName, 0, 0);
+				ds.addDynamic(dynamic);
 			}catch (IOException ex) {
 				ex.printStackTrace();
 			}
 		} else {
-			System.out.println(filePath + fileName);
+			//System.out.println(filePath + fileName);
 			System.out.println("notFound");
 		}
 		
@@ -85,4 +92,49 @@ public class Dynamics {
 		}
 		
 	}
+	
+	// mycom 当前用户对某一条动态的评论 返回的是一个 json 数据，当添加评论成功返回 result="success"
+	@RequestMapping(value="mycom")
+	public void mycom(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		HttpSession session = request.getSession();
+		User user = (User)session.getAttribute("user");
+		int dynamic_id = Integer.parseInt(request.getParameter("dynamic_id"));
+		String comment = request.getParameter("comment");
+		//已经获取了当前的用户，当前用户评论的动态的 id 已经用户评论的内容，现在可以将信息存储在数据库中
+		cs.addCommon(new Common(dynamic_id, user.getId(), comment));
+		response.getWriter().print("{\"result\":\"success\", \"userName\": \"" + user.getName() + "\"}");
+	}
+	
+	//显示用户信息 userinfo
+	@RequestMapping(value="userinfo")
+	public String userinfo() {
+		//提供用户的信息 允许用户修改头像
+		return "";
+	}
+	
+	//转发到 history.html 页面
+	@RequestMapping(value="history")
+	public String history () {
+		return "history.html";
+	}
+	
+	//显示用户的历史动态
+	@RequestMapping(value="getHistory")
+	public void history(HttpServletRequest request, HttpServletResponse response) throws JsonProcessingException {
+		response.setContentType("text/html; charset=utf-8");
+		HttpSession session = request.getSession();
+		User user = (User)session.getAttribute("user");
+		List<Dynamic> dynamics = ds.selectDynamicByUserId(user.getId());
+		try {
+			ObjectMapper mapper = new ObjectMapper();
+			String info = mapper.writeValueAsString(dynamics);
+			response.getWriter().print(info);
+			//System.out.println(info);
+		} catch (JsonProcessingException ex) {
+			ex.printStackTrace();
+		} catch (IOException ex) {
+			ex.printStackTrace();
+		}	
+	}
+	
 }

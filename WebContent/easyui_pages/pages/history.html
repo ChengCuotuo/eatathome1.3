@@ -92,7 +92,7 @@
 			})
 			
 			var $simpleDynamics = $('#simpleDynamics');
-			var url = "viewDynamics";
+			var url = "getHistory";
 			var args = {'time': new Date()};
 			var $dynamic = $('#dynamic');
 			
@@ -245,7 +245,7 @@
     <div id="dynamicinfo" data-options="region:'center',disabled:true">
     	<!-- 发布动态 -->
         <div id="releaseDynamic" class="easyui-panel" style="padding:10px 0 10px 10px;margin:10px 0;">
-	        <input id="describe" class="easyui-textbox" label="发布动态：" labelPosition="top"
+	        <input id="describe" class="easyui-textbox" label="动态描述：" labelPosition="top"
 	               multiline="true" name="describe" value="" style="width:80%;height:80px"
 	               data-options="prompt:'描述你的心情..'">
 	        

@@ -75,7 +75,7 @@
 				$choose2.text('修改密码');
 				//注意这里 ${pageContext.request.contextPath} 需要使用 "" 不能使用''
 				$head_img.attr('src', "${pageContext.request.contextPath}/../easyui_pages/pages/images/user/" + data.img);
-				$head_img.parent().attr('href', '#');
+				$head_img.parent().attr('href', 'userinfo');
 			}
 		})
 	})
@@ -106,12 +106,12 @@
     </div>
 
     <div style="height:100%;width:30%; float:left; font-size:20px;">
+     	<a href="init" style="color: #ffffff;float:left; padding:40px 50px 0 0;
+                text-decoration: none;">查看菜谱</a>
         <a class="notloginhead" href="toDynamicForm" style="color: #ffffff;float:left; padding:40px 50px 0 0;
                 text-decoration: none;">查看动态</a>
-        <a class="notloginhead" href="releaseDynamic" style="color: #ffffff;float:left; padding:40px 50px 0 0;
-                text-decoration: none;">发布动态</a>
-        <a href="init" style="color: #ffffff;float:left; padding:40px 50px 0 0;
-                text-decoration: none;">查看菜谱</a>
+		<a class="notloginhead" href="history" style="color: #ffffff;float:left; padding:40px 50px 0 0;
+                text-decoration: none;">历史动态</a>
     </div>
 
     <div id="mm1" style="width:150px;">

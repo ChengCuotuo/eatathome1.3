@@ -25,7 +25,7 @@
 	<select id="selectDynamicByUserId" parameterType="int"
 		resultMap="commonResultMap">
 			SELECT * FROM t_dynamic 
-				WHERE DUId = #{UId}
+				WHERE DUId = #{UId} ORDER BY DDate DESC LIMIT 20
 				<!-- 这里使用的UID对应的就是UserMapper调用的时候传的值 -->
 	</select>
 	

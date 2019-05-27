@@ -50,8 +50,8 @@ public class LoginRegisterForm {
 			@Valid @ModelAttribute User user) throws IOException {
 		response.setCharacterEncoding("utf-8");
 		HttpSession session = request.getSession();
-		//设置最大发呆时长
-		session.setMaxInactiveInterval(60);
+		//设置最大发呆时长 10分钟
+		session.setMaxInactiveInterval(600);
 		
 		//System.out.println(user);
 		User userHad = userService.selectUser(user);
