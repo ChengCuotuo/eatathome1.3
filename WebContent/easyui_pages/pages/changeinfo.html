@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>dynamic</title>
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/../easyui_pages/themes/default/easyui.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/../easyui_pages/themes/icon.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/../easyui_pages/themes/color.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/../easyui_pages/pages/dynamicstyle.css">
+   	<script type="text/javascript" src="${pageContext.request.contextPath}/../easyui_pages/jquery.min.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/../easyui_pages/jquery.easyui.min.js"></script>
+    <script type="text/javascript">
+        $(function() {
+        	//添加当前用户的头像
+        	var $head_img = $('#head_img');
+			var url = "getuserinfo";
+			var args = {'time': new Date()};
+			$.getJSON(url, args, function(data) {
+				$head_img.attr('src', "${pageContext.request.contextPath}/../easyui_pages/pages/images/user/" + data.img);
+			})
+        	
+        	
+            var add = true;
+            var $photo = $("input[name='photo']");
+            //当选中图片的时候要把选中的图片显示在下面
+            $photo.on("change",function(){
+                var objUrl = getObjectURL(this.files[0]) ; //获取图片的路径，该路径不是图片在本地的路径
+                if (add) {
+                    $('#head_img').attr('src', objUrl);
+                    add = false;
+                } else {
+                    alert("最多上传一张图片");
+                }
+            });
+
+            $('#choose a').on('click', function(){
+                if (add) {
+                    alert("未选择图片");
+                } else {
+                    //提交表单的请求，进行头像的存储以及数据库中头像名称的更新
+                    document.forms[0].submit();
+                    alert("头像已修改");
+                }
+            });
+
+            //获取文件的路径
+            function getObjectURL(file) {
+                var url = null ;
+                if (window.createObjectURL!=undefined) {// basic
+                    url = window.createObjectURL(file) ;
+                } else if (window.URL!=undefined) { // mozilla(firefox)
+                    url = window.URL.createObjectURL(file) ;
+                } else if (window.webkitURL!=undefined) { // webkit or chrome
+                    url = window.webkitURL.createObjectURL(file) ;
+                }
+                return url ;
+            }
+        });
+        // 对于提交的处理是修改数据库中的密码，需要在 controller 中重新写一个方法处理该事件
+        //定义按钮在表单中的更能，提交和清空
+        function submitForm(){
+        	var oldpass = $('#oldpass').val();
+     	    var pass = $('#pass').val();
+     	    var args = {"time" : new Date()};
+     	    var url = 'changepass?oldpass=' + oldpass + '&pass=' + pass;
+     	    $.post(url, args, function(data){
+     	    	if (data.result == 'false') {
+     	    		alert(data.result);
+     	    	} else {
+     	    		alert("密码已修改");
+     	    	}
+     	    },'json')
+        }
+        function clearForm(){
+            $('#ff').form('clear');
+        }
+
+        $.extend($.fn.validatebox.defaults.rules, {
+            confirmPass: {
+                validator: function(value, param){
+                    var pass = $(param[0]).passwordbox('getValue');
+                    return value == pass;
+                },
+                message: '两次密码不同'
+            }
+        })
+    </script>
+</head>
+<body class="easyui-layout">
+<!-- 这个布局比较复杂，center、west、east
+    其中west 又有center、north、south
+    尺寸不可调节，disabled:true
+    不现实边界 border:false-->
+<!-- 顶部放图标等导航信息 -->
+<div data-options="region:'north',disabled:true" style="height:14%; background-color: #1f637b">
+    <div id="logo" style="height:100%;width:30%;float:left;">
+        <a href="init">
+            <img id="go_homepage" src="${pageContext.request.contextPath}/../easyui_pages/pages/images/theme.jpg"
+                 style="height:90%;width:80%; margin:0 0 0 20px; " alt="图片无法显示"/>
+        </a>
+    </div>
+
+    <div style="height:100%;width:30%; float:left; font-size:20px;">
+        <a href="init" style="color: #ffffff;float:left; padding:40px 50px 0 0;
+                text-decoration: none;">查看菜谱</a>
+        <a href="toDynamicForm" style="color: #ffffff;float:left; padding:40px 50px 0 0;
+                text-decoration: none;">查看动态</a>
+        <a href="history" style="color: #ffffff;float:left; padding:40px 50px 0 0;
+                text-decoration: none;">历史动态</a>
+    </div>
+</div>
+<div data-options="region:'east',disabled:true" style="width:35%;padding-right: 10px;">
+</div>
+<div data-options="region:'center',disabled:true" style="width:30%;padding-right: 10px;">
+    <a href="#"><img id="head_img" src=""
+                     style="width:100%;"
+                     alt="图片无法显示"/>
+    </a>
+
+    <div id="releaseDynamic" class="easyui-panel" style="width:95%;padding:0 0 10px 10px;margin:10px 0;">
+        <p> 重新选择头像：</p>
+        <!-- 选择并上传图片-->
+        <form id="choose" action="changehead" method="post" enctype="multipart/form-data">
+            <input type="file" name="photo"/>
+            <a class="easyui-linkbutton" data-options="iconCls:'icon-flay'">上传</a>
+        </form>
+    </div>
+
+    <form id="ff" method="post" style="margin:0 0 0 10px;">
+        <div style="margin-bottom:20px">
+            <input id="oldpass" class="easyui-textbox" name="password" style="width:100%"  prompt="请输入旧密码"
+                   data-options="label:'旧密码:', labelPosition:'before',iconCls:'icon-lock'">
+        </div>
+        <div style="margin-bottom:20px">
+            <input id="pass" class="easyui-textbox" type="password" name="password"
+                   style="width:100%" prompt="请输入密码"
+                   data-options="label:'新密码:', labelPosition:'before',iconCls:'icon-lock'">
+        </div>
+        <div style="margin-bottom:20px">
+            <input class="easyui-textbox" type="password" name="password"
+                   style="width:100%" prompt="请确认密码"
+                   data-options="label:'确认密码:', labelPosition:'before',iconCls:'icon-lock'"
+                   validType="confirmPass['#pass']">
+        </div>
+        <div style="padding:10px 0">
+            <a href="#" class="easyui-linkbutton" onclick="submitForm()"
+               style="width:35%;">确认更改</a>
+            <a href="javascript:void(0)" class="easyui-linkbutton" onclick="clearForm()"
+               style="width:35%;">清空输入</a>
+        </div>
+    </form>
+</div>
+<div data-options="region:'west',disabled:true" style="width:35%;padding-left: 10px;">
+</div>
+</body>
+</html>

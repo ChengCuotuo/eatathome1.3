@@ -25,6 +25,11 @@ public class LoginRegisterForm {
 		return "loginForm.html";
 	}
 	
+	@RequestMapping(value="toRegisterForm")
+	public String forwardRegisterForm() {
+		return "registForm.html";
+	}
+	
 	// 处理用户注册 register
 	@RequestMapping(value="register", method=RequestMethod.POST)
 	public void UserRegister(HttpServletResponse response,
@@ -33,7 +38,9 @@ public class LoginRegisterForm {
 		User userHad = userService.selectSimpleUser(user);
 		//当查询不到用户的时候 说明这个用户名不存在 就允许用这个对象进行注册
 		if (userHad == null) {
-			userService.addUser(new User(user.getName(), user.getPassword()));
+			User newUser = new User(user.getName(), user.getPassword());
+			newUser.setHead("default.jpg");
+			userService.addUser(newUser);
 			response.getWriter().print("{\"result\": \"success\", \"info\" : \"注册成功\"}");
 			//注册成功之后跳转到登录界面
 			//return "loginForm.html";

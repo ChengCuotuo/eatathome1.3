@@ -105,13 +105,6 @@ public class Dynamics {
 		response.getWriter().print("{\"result\":\"success\", \"userName\": \"" + user.getName() + "\"}");
 	}
 	
-	//显示用户信息 userinfo
-	@RequestMapping(value="userinfo")
-	public String userinfo() {
-		//提供用户的信息 允许用户修改头像
-		return "";
-	}
-	
 	//转发到 history.html 页面
 	@RequestMapping(value="history")
 	public String history () {
